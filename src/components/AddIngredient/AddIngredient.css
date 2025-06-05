@@ -1,0 +1,45 @@
+.AddIngredient {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 500px;
+    padding: 15px;
+}
+.AddIngredient__firstColumn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.AddIngredient__firstColumn img {
+    width: 60px;
+    height: 60px;
+}
+.AddIngredient__firstColumn h3 {
+    margin: 0;
+}
+.AddIngredient__secondColumn p {
+    margin: 0;
+}
+.AddIngredient__secondColumn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+.AddIngredient__secondColumn p {
+    font-size: 18px;
+    margin: 0;
+}
+.AddIngredient__secondColumn button {
+    height: 100%;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+.AddIngredient__secondColumn button:active {
+    box-shadow: 0 0 6px 0 gray;
+}

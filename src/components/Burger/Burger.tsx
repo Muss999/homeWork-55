@@ -109,10 +109,46 @@ const Burger = () => {
                         <div className="Seeds1"></div>
                         <div className="Seeds2"></div>
                     </div>
-                    <Bacon />
-                    <Salad />
-                    <Cheese />
-                    <Meat />
+                    {ingredients
+                        .map((ingredient) => {
+                            const ingredientsArr = [];
+                            for (let i = 0; i < ingredient.count; i++) {
+                                switch (ingredient.name) {
+                                    case "Meat":
+                                        ingredientsArr.push(
+                                            <Meat
+                                                key={`${ingredient.id}-${i}`}
+                                            />
+                                        );
+                                        break;
+                                    case "Bacon":
+                                        ingredientsArr.push(
+                                            <Bacon
+                                                key={`${ingredient.id}-${i}`}
+                                            />
+                                        );
+                                        break;
+                                    case "Cheese":
+                                        ingredientsArr.push(
+                                            <Cheese
+                                                key={`${ingredient.id}-${i}`}
+                                            />
+                                        );
+                                        break;
+                                    case "Salad":
+                                        ingredientsArr.push(
+                                            <Salad
+                                                key={`${ingredient.id}-${i}`}
+                                            />
+                                        );
+                                        break;
+                                    default:
+                                        alert("something went wrong");
+                                }
+                            }
+                            return ingredientsArr;
+                        })
+                        .flat()}
                     <div className="BreadBottom"></div>
                 </div>
             </div>

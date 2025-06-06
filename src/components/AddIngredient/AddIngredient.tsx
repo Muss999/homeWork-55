@@ -1,10 +1,13 @@
-import type { FC } from "react";
+import type { FC, MouseEventHandler } from "react";
 import "./AddIngredient.css";
 import { INGREDIENTS } from "../../helpers/consts";
 
 interface Props {
     name: string;
     count: number;
+    increaseCount: MouseEventHandler;
+    decreaseCount: MouseEventHandler;
+    resetCount: MouseEventHandler;
 }
 
 const AddIngredient: FC<Props> = (props) => {
@@ -21,10 +24,10 @@ const AddIngredient: FC<Props> = (props) => {
                 <p>{price} Som</p>
             </div>
             <div className="AddIngredient__secondColumn">
-                <button>-</button>
-                <button>+</button>
-                <p>x {props.count}</p>
-                <button>Reset</button>
+                <button onClick={props.decreaseCount}>-</button>
+                <button onClick={props.increaseCount}>+</button>
+                <p>x{props.count}</p>
+                <button onClick={props.resetCount}>Reset</button>
             </div>
         </div>
     );

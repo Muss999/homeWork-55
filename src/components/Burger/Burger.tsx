@@ -13,31 +13,88 @@ const Burger = () => {
         { name: "Salad", count: 0, id: crypto.randomUUID() },
         { name: "Cheese", count: 0, id: crypto.randomUUID() },
     ]);
+
+    const increaseCount = (id: string) => {
+        setIngredient((prevState) => {
+            return prevState.map((ingredient) => {
+                if (ingredient.id === id) {
+                    return {
+                        ...ingredient,
+                        count: ingredient.count + 1,
+                    };
+                }
+                return ingredient;
+            });
+        });
+    };
+    const decreaseCount = (id: string) => {
+        setIngredient((prevState) => {
+            return prevState.map((ingredient) => {
+                if (ingredient.id === id) {
+                    if (ingredient.count <= 0) {
+                        return ingredient;
+                    }
+                    return {
+                        ...ingredient,
+                        count: ingredient.count - 1,
+                    };
+                }
+                return ingredient;
+            });
+        });
+    };
+    const resetCount = (id: string) => {
+        setIngredient((prevState) => {
+            return prevState.map((ingredient) => {
+                if (ingredient.id === id) {
+                    if (ingredient.count <= 0) {
+                        return ingredient;
+                    }
+                    return {
+                        ...ingredient,
+                        count: 0,
+                    };
+                }
+                return ingredient;
+            });
+        });
+    };
+
     return (
-        <div className="mainBlock">
-            <div className="ingredientsBlock">
-                {ingredients.map((ingredient) => {
-                    return (
-                        <AddIngredient
-                            key={ingredient.id}
-                            name={ingredient.name}
-                            count={ingredient.count}
-                        />
-                    );
-                })}
-            </div>
-            <div className="Burger">
-                <div className="BreadTop">
-                    <div className="Seeds1"></div>
-                    <div className="Seeds2"></div>
+        <>
+            <p className="totalPrice">Total price: {}</p>
+            <div className="mainBlock">
+                <div className="ingredientsBlock">
+                    {ingredients.map((ingredient) => {
+                        return (
+                            <AddIngredient
+                                key={ingredient.id}
+                                name={ingredient.name}
+                                count={ingredient.count}
+                                increaseCount={() =>
+                                    increaseCount(ingredient.id)
+                                }
+                                decreaseCount={() =>
+                                    decreaseCount(ingredient.id)
+                                }
+                                resetCount={() => resetCount(ingredient.id)}
+                            />
+                        );
+                    })}
                 </div>
-                <Bacon />
-                <Salad />
-                <Cheese />
-                <Meat />
-                <div className="BreadBottom"></div>
+                <div className="Burger">
+                    <div className="BreadTop">
+                        <div className="Seeds1"></div>
+                        <div className="Seeds2"></div>
+                    </div>
+                    <Bacon />
+                    <Salad />
+                    <Cheese />
+                    <Meat />
+                    <div className="BreadBottom"></div>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

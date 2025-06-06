@@ -5,6 +5,7 @@ import Salad from "./Ingredients/Salad/Salad";
 import Cheese from "./Ingredients/Cheese/Cheese";
 import Meat from "./Ingredients/Meat/Meat";
 import AddIngredient from "../AddIngredient/AddIngredient";
+import { INGREDIENTS } from "../../helpers/consts";
 
 const Burger = () => {
     const [ingredients, setIngredient] = useState([
@@ -13,11 +14,19 @@ const Burger = () => {
         { name: "Salad", count: 0, id: crypto.randomUUID() },
         { name: "Cheese", count: 0, id: crypto.randomUUID() },
     ]);
+    const [price, setPrice] = useState(30);
 
     const increaseCount = (id: string) => {
         setIngredient((prevState) => {
             return prevState.map((ingredient) => {
                 if (ingredient.id === id) {
+                    const constIngredient = INGREDIENTS.filter(
+                        (constIngredient) =>
+                            constIngredient.name == ingredient.name
+                    )[0];
+                    const newPrice = price + constIngredient.price;
+                    setPrice(newPrice);
+
                     return {
                         ...ingredient,
                         count: ingredient.count + 1,
@@ -34,6 +43,13 @@ const Burger = () => {
                     if (ingredient.count <= 0) {
                         return ingredient;
                     }
+                    const constIngredient = INGREDIENTS.filter(
+                        (constIngredient) =>
+                            constIngredient.name == ingredient.name
+                    )[0];
+                    const newPrice = price - constIngredient.price;
+                    setPrice(newPrice);
+
                     return {
                         ...ingredient,
                         count: ingredient.count - 1,
@@ -47,9 +63,15 @@ const Burger = () => {
         setIngredient((prevState) => {
             return prevState.map((ingredient) => {
                 if (ingredient.id === id) {
-                    if (ingredient.count <= 0) {
-                        return ingredient;
-                    }
+                    const constIngredient = INGREDIENTS.filter(
+                        (constIngredient) =>
+                            constIngredient.name == ingredient.name
+                    )[0];
+
+                    const newPrice =
+                        price - ingredient.count * constIngredient.price;
+                    setPrice(newPrice);
+
                     return {
                         ...ingredient,
                         count: 0,
@@ -62,7 +84,7 @@ const Burger = () => {
 
     return (
         <>
-            <p className="totalPrice">Total price: {}</p>
+            <p className="totalPrice">Total price: {price} som</p>
             <div className="mainBlock">
                 <div className="ingredientsBlock">
                     {ingredients.map((ingredient) => {

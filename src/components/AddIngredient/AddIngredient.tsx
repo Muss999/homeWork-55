@@ -26,7 +26,7 @@ const AddIngredient: FC<Props> = (props) => {
             <div className="AddIngredient__secondColumn">
                 <button onClick={props.decreaseCount}>-</button>
                 <button onClick={props.increaseCount}>+</button>
-                <p>x{props.count}</p>
+                <p>{props.count}x</p>
                 <button onClick={props.resetCount}>Reset</button>
             </div>
         </div>
